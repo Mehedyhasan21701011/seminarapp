@@ -144,6 +144,8 @@ const Dashboard = (props) => {
 
         const foundBook = bookInfo.find(element => element.book_id.toString() === search.toString());
 
+        // console.log(foundBook);
+
         if (foundBook) {
             setFoundBook(foundBook);
         } else {
@@ -194,6 +196,7 @@ const Dashboard = (props) => {
     }, [countbook, countIssue]);
 
     const [countUser, setCountUser] = useState(0);
+
     useEffect(() => {
         setCountUser(user.length);
     }, [user]);
@@ -229,7 +232,10 @@ const Dashboard = (props) => {
         }
         setShowIssueForm(false);
     };
-
+    // console.log(issueINFO);
+    const seeTotalBook = () => {
+        navigate('/bookinformation');
+    }
 
 
     return (
@@ -276,27 +282,28 @@ const Dashboard = (props) => {
                             <table style={{ width: '100%' }}>
                                 <thead style={{ backgroundColor: '#F2F2F2' }}>
                                     <tr>
-                                        <th style={{ borderBottom: '1px solid #ccc' }}>Book ID</th>
-                                        <th style={{ borderBottom: '1px solid #ccc' }}>Title</th>
-                                        <th style={{ borderBottom: '1px solid #ccc' }}>Shelve</th>
-                                        <th style={{ borderBottom: '1px solid #ccc' }}>Category</th>
+                                        <th style={{ borderBottom: '1px solid #ccc', borderRight: '1px solid #ccc' }}>Book ID</th>
+                                        <th style={{ borderBottom: '1px solid #ccc', borderRight: '1px solid #ccc' }}>Title</th>
+                                        <th style={{ borderBottom: '1px solid #ccc', borderRight: '1px solid #ccc' }}>Shelve</th>
+                                        <th style={{ borderBottom: '1px solid #ccc', borderRight: '1px solid #ccc' }}>Category</th>
                                         <th style={{ borderBottom: '1px solid #ccc' }}>Issued By</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{foundBook.book_id}</td>
-                                        <td>{foundBook.title}</td>
-                                        <td>{foundBook.Shelve_No}</td>
-                                        <td>{foundBook.category_id}</td>
-                                        <td>
-                                            {issueINFO.find(item => item.book_id === foundBook.book_id) ?
-                                                issueINFO.find(item => item.book_id === foundBook.book_id).Name
+                                        <td style={{ borderBottom: '1px solid #ccc', borderRight: '1px solid #ccc' }}>{foundBook.book_id}</td>
+                                        <td style={{ borderBottom: '1px solid #ccc', borderRight: '1px solid #ccc' }}>{foundBook.title}</td>
+                                        <td style={{ borderBottom: '1px solid #ccc', borderRight: '1px solid #ccc' }}>{foundBook.Shelve_No}</td>
+                                        <td style={{ borderBottom: '1px solid #ccc', borderRight: '1px solid #ccc' }}>{foundBook.category_id}</td>
+                                        <td style={{ borderBottom: '1px solid #ccc' }}>
+                                            {issueINFO.find(item => item.book_issue_id === foundBook.book_id) ?
+                                                issueINFO.find(item => item.book_issue_id === foundBook.book_id).issue_by
                                                 : 'NULL'}
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+
                         </div>
                     )}
                 </div>
@@ -312,7 +319,7 @@ const Dashboard = (props) => {
             </div>
             <div style={{ height: '150px' }}>
                 <div className='stats'>
-                    <div className='stats-block' >
+                    <div className='stats-block' onClick={seeTotalBook} >
                         <LibraryBooksIcon className='stats-icon' style={{ fontSize: 80 }} />
                         <p className='stats-title'>Total Books</p>
                         <p className='stats-count'>{countbook}</p>

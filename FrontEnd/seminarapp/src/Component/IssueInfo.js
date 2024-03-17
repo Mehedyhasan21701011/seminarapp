@@ -6,11 +6,14 @@ import { Button } from 'react-bootstrap';
 
 const IssueInfo = () => {
     const [issueInfo, setIssueInfo] = useState([]);
+    const [bookInfo, setBookInfo] = useState([]);
 
     const fetchData = async () => {
         try {
             const response = await axios.get('http://localhost:8801/book_issue_log');
+            const response2 = await axios.get('http://localhost:8801/books');
             setIssueInfo(response.data);
+            setBookInfo(response2.data);
         } catch (error) {
             console.error('Error fetching issue details:', error);
         }
@@ -27,9 +30,15 @@ const IssueInfo = () => {
     };
     // console.log(issueInfo);
     const url = 'http://localhost:8801/book_issue_log';
-
     const handleBookReturn = async (book_issue_id) => {
         try {
+            // Check if the book_issue_id matches the condition (e.g., book_id)
+            const bookToReturn = issueInfo.find(issue => issue.book_issue_id === book_issue_id);
+            if (!bookToReturn) {
+                console.error(`Book with book_issue_id ${book_issue_id} not found.`);
+                return;
+            }
+
             // Send a DELETE request to the server with the book_issue_id in the URL
             const response = await fetch(`${url}/${book_issue_id}`, {
                 method: 'DELETE',
@@ -40,6 +49,7 @@ const IssueInfo = () => {
 
             if (response.ok) {
                 console.log(`Record with book_issue_id ${book_issue_id} deleted successfully.`);
+                // Fetch data again after deletion
                 fetchData();
             } else {
                 console.error(`Failed to delete record with book_issue_id ${book_issue_id}.`);
@@ -51,6 +61,15 @@ const IssueInfo = () => {
         }
     };
 
+    const currentStatus = (book_issue_id) => {
+        const filterIssueBook = issueInfo.filter(item => item.book_issue_id === book_issue_id);
+        const filterBook = bookInfo.filter(item => item.book_id === book_issue_id);
+        if (filterBook.length >= filterIssueBook.length) {
+            return 'Available';
+        } else {
+            return 'Waiting';
+        }
+    }
 
 
     return (
@@ -65,6 +84,7 @@ const IssueInfo = () => {
                         <th>Issue_Date</th>
                         <th>Return_Date</th>
                         <th>Reference</th>
+                        <th>Status</th>
                         <th>Return</th>
                     </tr>
                 </thead>
@@ -77,6 +97,7 @@ const IssueInfo = () => {
                             <td>{element.time_stamp}</td>
                             <td>{calculateReturnDate(element.time_stamp)}</td>
                             <td>{element.reference}</td>
+                            <td>{currentStatus(element.book_issue_id)}</td>
                             <td><Button onClick={() => handleBookReturn(element.book_issue_id)}>Return</Button></td>
                         </tr>
                     ))}

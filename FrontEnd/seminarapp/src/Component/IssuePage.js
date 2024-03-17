@@ -3,10 +3,9 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import './IssuePage.css';
 
-
 const Issue = () => {
     const location = useLocation();
-    const bookId = location.state.bookId;
+    const bookId = location.state ? location.state.bookId : 'Book ID Not Available'; // Placeholder for invalid/missing bookId
     const [issueData, setIssueData] = useState({
         name: '',
         stu_id: '',
@@ -52,7 +51,6 @@ const Issue = () => {
             console.error('Error issuing book:', error);
         }
     };
-    console.log(issueData);
 
     return (
         <div className="hr-container">

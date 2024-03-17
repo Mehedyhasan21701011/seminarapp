@@ -6,6 +6,7 @@ import SignUp from './Component/SignUp';
 import Dashboard from './Component/Dashboard';
 import IssueInfo from './Component/IssueInfo';
 import Issue from './Component/IssuePage';
+import BookInformation from './Component/BookInformation';
 
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/issueinfo' element={<IssueInfo />}></Route>
         <Route path="/issue" element={<Issue />}></Route>
+        <Route path="/bookinformation" element={<BookInformation />}></Route>
       </Routes>
     </BrowserRouter>
   );
