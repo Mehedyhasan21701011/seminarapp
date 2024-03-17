@@ -1,0 +1,32 @@
+/* Issue.css */
+.styled-hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    /* Define border properties */
+    width: 100%;
+    /* Define width of the hr */
+}
+
+/* Animation */
+.styled-hr {
+    animation: pulse 2s infinite;
+    /* Apply pulse animation */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    /* Initial scale */
+    50% {
+        transform: scale(1.05);
+    }
+
+    /* Scale up */
+    100% {
+        transform: scale(1);
+    }
+
+    /* Scale down to original size */
+}

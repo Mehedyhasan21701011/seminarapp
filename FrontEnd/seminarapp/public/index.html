@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Title</title>
+  <style>
+    body {
+      margin: 0;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      background-color: #f0f0f0;
+      /* Light background color */
+      font-family: Arial, sans-serif;
+      /* Choose appropriate font */
+    }
+
+    #root {
+      background-color: rgb(143, 196, 233);
+      width: 1500px;
+      height: 135vh;
+      /* Rounded corners for the container */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      /* Shadow effect */
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      opacity: 0;
+      /* Initially hide the content */
+      transition: opacity 0.5s;
+      /* Smooth transition for opacity */
+    }
+
+    .content-container {
+      padding: 20px;
+      /* Add padding for the content */
+      text-align: center;
+      /* Center align text */
+      color: #fff;
+      /* Text color */
+    }
+
+    .content-container h1 {
+      font-size: 24px;
+      /* Heading font size */
+      margin-bottom: 20px;
+      /* Add margin below heading */
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root">
+    <div class="content-container">
+      <h1 id="welcome-message" style="color: black;">Welcome to Your App</h1>
+      <!-- Your other content goes here -->
+    </div>
+  </div>
+
+  <script>
+    // JavaScript to show the content after 2 seconds
+    setTimeout(function () {
+      document.getElementById("root").style.opacity = "1";
+    }, 2000);
+  </script>
+</body>
+
+</html>
