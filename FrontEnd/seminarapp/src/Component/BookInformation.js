@@ -17,7 +17,7 @@ const BookInformation = () => {
     }, []);
 
     return (
-        <div style={{ minHeight: '100%', minWidth: '100%', overflow: 'hidden', padding: '20px' }}>
+        <div style={{ minHeight: '100%', minWidth: '100%', overflow: 'auto', padding: '20px' }}>
             <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Book Information</h1>
             <div style={{ overflowX: 'auto' }}>
                 <Table striped bordered hover>
@@ -30,6 +30,7 @@ const BookInformation = () => {
                             <th>Added By</th>
                             <th>Added Timestamp</th>
                             <th>Shelve No</th>
+                            <th>Remove Book</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,7 @@ const BookInformation = () => {
                                 <td>{book.added_by}</td>
                                 <td>{book.added_at_timestamp}</td>
                                 <td>{book.Shelve_No}</td>
+                                <th style={{ color: 'brown' }}>Delete</th>
                             </tr>
                         ))}
                     </tbody>

@@ -71,7 +71,7 @@ const BookDetails = () => {
             ))}
 
             {selectedCategory && (
-                <div className="popup" style={{ backgroundColor: '#8FC4E9' }}>
+                <div className="popup" style={{ minHeight: '300px', overflow: 'auto', backgroundColor: '#8FC4E9' }}>
                     <button onClick={closePopup}>Close</button>
                     <h3>Category: {selectedCategory}</h3>
                     <hr />
@@ -85,7 +85,7 @@ const BookDetails = () => {
                                 <th>ISSUED</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style={{ overflow: 'auto' }}>
                             {Object.values(bookDetails.reduce((acc, curr) => {
                                 if (curr.category_id === selectedCategory) {
                                     acc[curr.title] = acc[curr.title] || curr;
@@ -103,8 +103,11 @@ const BookDetails = () => {
                                 </tr>
                             ))}
                         </tbody>
+
                     </table>
                 </div>
+
+
             )}
         </div>
     );

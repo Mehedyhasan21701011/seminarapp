@@ -22,7 +22,7 @@ const Issue = () => {
             [name]: value
         }));
     };
-
+    const [status, setStatus] = useState(false);
     const handleIssueSubmit = async (e) => {
         e.preventDefault();
         const { name, stu_id, isbn, branch, reference, year } = issueData;
@@ -37,6 +37,12 @@ const Issue = () => {
             // Handle success, maybe show a success message
             // console.log('Issue successful:', response.data);
             // Clear the form
+
+
+        } catch (error) {
+            // Handle error, maybe show an error message
+            console.error('Error issuing book:', error);
+        } finally {
             setIssueData({
                 name: '',
                 stu_id: '',
@@ -45,10 +51,7 @@ const Issue = () => {
                 reference: '',
                 year: ''
             });
-
-        } catch (error) {
-            // Handle error, maybe show an error message
-            console.error('Error issuing book:', error);
+            setStatus(true);
         }
     };
 
@@ -63,10 +66,10 @@ const Issue = () => {
                         value={issueData.name}
                         style={{ margin: '8px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: '250px' }}
                         type='text'
-                        placeholder='Enter your Name'
+                        placeholder='Enter your name'
                         name='name'
                     />
-                    <input
+                    <input required
                         onChange={handleIssueChange}
                         value={issueData.stu_id}
                         style={{ margin: '8px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: '250px' }}
@@ -110,8 +113,9 @@ const Issue = () => {
                             cursor: 'pointer',
                         }}
                     >
-                        OK
+                        submit
                     </button>
+                    <p style={{ display: status ? 'block' : 'none', color: 'black', fontWeight: 'bold' }}>Thanks! Your book issued successfully</p>
                 </div>
             </div>
         </div>

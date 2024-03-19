@@ -201,7 +201,7 @@ const Dashboard = (props) => {
         setCountUser(user.length);
     }, [user]);
 
-
+    const [status, setStatus] = useState(false);
     const handelIssueOk = async (e) => {
         e.preventDefault();
         const { name, stu_id, isbn, branch, reference, year } = issueData;
@@ -229,6 +229,7 @@ const Dashboard = (props) => {
                 stu_id: '',
                 isbn: ''
             });
+            setStatus(true);
         }
         setShowIssueForm(false);
     };
@@ -240,12 +241,19 @@ const Dashboard = (props) => {
 
     return (
         <div className='container dashboard-background '>
-            <div className='HeaderPart' style={{ height: '150px', justifyContent: 'space-between', alignItems: 'center', display: 'flex', backgroundColor: 'black', marginTop: '0px', padding: '10px' }}>
-                <div style={{ justifyContent: 'space-between' }}>
-                    <a style={{ padding: '10px', cursor: 'pointer', color: 'whitesmoke' }} onClick={toggleAddBookForm}><strong>ADD BOOK</strong></a>
-                    <Link to="/issueinfo"><strong>Issue Info</strong></Link>
-                    <a style={{ padding: '10px' }} href='#'><strong>Learn</strong></a>
+            <div className='HeaderPart' style={{ height: '150px', justifyContent: 'space-between', alignItems: 'center', display: 'flex', backgroundColor: '#818286', marginTop: '0px', padding: '10px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px' }}>
+                    <a style={{ padding: '10px', cursor: 'pointer', color: 'whitesmoke', marginLeft: '15px' }} onClick={toggleAddBookForm}>
+                        <h6 style={{ backgroundColor: '#4682B4', padding: '3px', borderRadius: '5px', width: '100px' }}>Add Book</h6>
+                    </a>
+                    <Link to="/issueinfo" style={{ display: 'inline-block', marginLeft: '30px' }}>
+                        <strong style={{ color: 'whitesmoke', display: 'inline' }}>Issue Info</strong>
+                    </Link>
+
+
+                    <a style={{ color: 'whitesmoke', padding: '10px' }} href='#'><strong>Learn</strong></a>
                 </div>
+
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <form style={{ display: 'flex', alignItems: 'center' }}>
                         <input
@@ -337,53 +345,62 @@ const Dashboard = (props) => {
                 </div>
             </div>
 
-            <div className='BodyPart ' style={{ width: '500px', height: "600px", display: 'flex', textAlign: 'center', justifyContent: 'space-between', margin: '120px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className='BodyPart ' style={{ width: '500px', height: "600px", display: 'flex', textAlign: 'center', justifyContent: 'space-between', marginTop: '120px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginLeft: '100px' }}>
                     {showAddBookForm && (
-                        <div className='model'>
+                        <div className='model' >
                             <div className='modal-content' style={{ textAlign: 'center', backgroundColor: '#8FC4E9', height: '400px', overflowX: 'auto' }}>
                                 <span className='close ' style={{ textAlign: 'right' }} onClick={toggleAddBookForm}>&times;</span>
-                                <form onSubmit={addBook}>
-                                    <label>Book ID:</label>
-                                    <input type='text' name='book_id' value={bookData.book_id} onChange={handleChange} required /><br></br>
-
-                                    <label>Title:</label>
-                                    <input type='text' name='title' value={bookData.title} onChange={handleChange} required /><br></br>
-
-                                    <label>Author:</label>
-                                    <input type='text' name='author' value={bookData.author} onChange={handleChange} required /><br></br>
-
-                                    <label>Description:</label>
-                                    <textarea name='description' value={bookData.description} onChange={handleChange} required /><br></br>
-
-                                    <label>Category_ID:</label>
-                                    <input type='text' name='category_id' value={bookData.category_id} onChange={handleChange} required /><br></br>
-
-                                    <label>Added by:</label>
-                                    <input type='text' name='added_by' value={bookData.added_by} onChange={handleChange} required /><br></br>
-
-                                    <label>Shelve_No:</label>
-                                    <input type='text' name='Shelve_No' value={bookData.Shelve_No} onChange={handleChange} required /><br></br>
-
-                                    <button type='submit'>Add Book</button><br></br>
+                                <form onSubmit={addBook} style={{ textAlign: 'center', maxWidth: '400px', margin: '0 auto' }}>
+                                    <div style={{ marginBottom: '15px' }}>
+                                        <label style={{ marginRight: '10px' }}>Book ID:</label>
+                                        <input style={{ borderRadius: '5px' }} type='text' name='book_id' value={bookData.book_id} onChange={handleChange} required />
+                                    </div>
+                                    <div style={{ marginBottom: '15px' }}>
+                                        <label style={{ marginRight: '10px' }}>Title:</label>
+                                        <input style={{ borderRadius: '5px' }} type='text' name='title' value={bookData.title} onChange={handleChange} required />
+                                    </div>
+                                    <div style={{ marginBottom: '15px' }}>
+                                        <label style={{ marginRight: '10px' }}>Author:</label>
+                                        <input style={{ borderRadius: '5px' }} type='text' name='author' value={bookData.author} onChange={handleChange} required />
+                                    </div>
+                                    <div style={{ marginBottom: '15px' }}>
+                                        <label style={{ marginRight: '10px' }}>Description:</label>
+                                        <textarea style={{ borderRadius: '5px' }} name='description' value={bookData.description} onChange={handleChange} required />
+                                    </div>
+                                    <div style={{ marginBottom: '15px' }}>
+                                        <label style={{ marginRight: '10px' }}>Category ID:</label>
+                                        <input style={{ borderRadius: '5px' }} type='text' name='category_id' value={bookData.category_id} onChange={handleChange} required />
+                                    </div>
+                                    <div style={{ marginBottom: '15px' }}>
+                                        <label style={{ marginRight: '10px' }}>Added by:</label>
+                                        <input style={{ borderRadius: '5px' }} type='text' name='added_by' value={bookData.added_by} onChange={handleChange} required />
+                                    </div>
+                                    <div style={{ marginBottom: '15px' }}>
+                                        <label style={{ marginRight: '10px' }}>Shelve No:</label>
+                                        <input type='text' style={{ borderRadius: '5px' }} name='Shelve_No' value={bookData.Shelve_No} onChange={handleChange} required />
+                                    </div>
+                                    <button type='submit' style={{ padding: '10px 20px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Add Book</button>
                                 </form>
+
                             </div>
                         </div>
                     )}
 
 
-                    <div className='' style={{ minWidth: '400px', height: '580px', margin: '5px' }}>
+                    <div className='' style={{ minWidth: '350px', height: '580px', marginLeft: '70px' }}>
                         <h2 style={{ textAlign: 'left', color: 'whitesmoke' }}>Book Category</h2>
-                        <hr style={{ color: 'whitesmoke', boxShadow: '5px 1px' }}></hr>
+                        {/* <hr style={{ color: 'whitesmoke', boxShadow: '5px 1px' }}></hr> */}
                         <BookDetails></BookDetails>
                     </div>
-                    <div className='' style={{ minWidth: '400px', margin: '5px', color: 'whitesmoke', margin: '5px' }}>
+                    <div className='' style={{ minWidth: '350px', margin: '5px', color: 'whitesmoke' }}>
                         <h2>Issue Book</h2>
                         <p>If you want to issue a book</p>
                         <button onClick={handleIssue}>
                             {showIssueForm ? 'Cancel' : 'Issue'}
                         </button>
-                        <hr style={{ color: 'whitesmoke', boxShadow: '5px 1px' }}></hr>
+                        <p style={{ display: status ? 'block' : 'none', color: 'black', fontWeight: 'bold' }}>Thanks! Your book issued successfully</p>
+                        {/* <hr style={{ color: 'whitesmoke', boxShadow: '5px 1px' }}></hr> */}
                         {
                             showIssueForm && (
                                 <div style={{ height: '200px', overflowX: 'auto' }}>
@@ -392,7 +409,7 @@ const Dashboard = (props) => {
                                             onChange={handleIssueChange}
                                             style={{ margin: '8px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: '250px' }}
                                             type='text'
-                                            placeholder='Enter your Name'
+                                            placeholder='Enter your name'
                                             value={issueData.name}
                                             name='name'
                                         />
@@ -401,7 +418,7 @@ const Dashboard = (props) => {
                                             onChange={handleIssueChange}
                                             style={{ margin: '8px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: '250px' }}
                                             type='text'
-                                            placeholder='Student Id'
+                                            placeholder='Student ID'
                                             name='stu_id'
                                         />
                                         <input
@@ -417,7 +434,7 @@ const Dashboard = (props) => {
                                             onChange={handleIssueChange}
                                             style={{ margin: '8px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: '250px' }}
                                             type='text'
-                                            placeholder='Branch'
+                                            placeholder='Semester'
                                             name='branch'
                                         />
                                         <input
@@ -433,7 +450,7 @@ const Dashboard = (props) => {
                                             onChange={handleIssueChange}
                                             style={{ margin: '8px', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: '250px' }}
                                             type='text'
-                                            placeholder='year'
+                                            placeholder='Year'
                                             name='year'
                                         />
                                         <button
@@ -448,8 +465,10 @@ const Dashboard = (props) => {
                                                 cursor: 'pointer',
                                             }}
                                         >
-                                            OK
+                                            submit
                                         </button>
+
+
                                     </div>
                                 </div>
                             )

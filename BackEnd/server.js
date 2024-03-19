@@ -7,12 +7,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// const db = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '',
-//     database: 'sig'
-// });
 
 const db1 = mysql.createConnection({
     host: 'localhost',
@@ -20,15 +14,6 @@ const db1 = mysql.createConnection({
     password: '',
     database: 'library'
 });
-
-// Handle MySQL connection errors
-// db.connect((err) => {
-//     if (err) {
-//         console.error('Error connecting to MySQL:', err);
-//     } else {
-//         console.log('Connected to MySQL');
-//     }
-// });
 
 db1.connect((err) => {
     if (err) {
@@ -82,7 +67,6 @@ app.post('/book_categories', (req, res) => {
 
 app.post('/users', (req, res) => {
     const { email, password } = req.body;
-
     db1.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], (err, result) => {
         if (err) {
             res.status(500).json({ success: false, message: 'Internal Server Error' });
@@ -93,9 +77,6 @@ app.post('/users', (req, res) => {
         }
     });
 });
-
-
-
 
 app.post('/book_issue', (req, res) => {
     const data = {

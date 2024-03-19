@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Title</title>
+  <title>Seminar App 2024</title>
   <style>
     body {
       margin: 0;
@@ -32,6 +32,8 @@
       /* Initially hide the content */
       transition: opacity 0.5s;
       /* Smooth transition for opacity */
+      background-repeat: no-repeat;
+      background-size: cover;
     }
 
     .content-container {
@@ -41,6 +43,8 @@
       /* Center align text */
       color: #fff;
       /* Text color */
+      justify-content: center;
+      align-self: center;
     }
 
     .content-container h1 {
@@ -50,13 +54,14 @@
       /* Add margin below heading */
     }
   </style>
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root">
     <div class="content-container">
-      <h1 id="welcome-message" style="color: black;">Welcome to Your App</h1>
+      <h1 id="welcome-message" style="color: black; font-size: larger;">Welcome to Our Seminar</h1>
       <!-- Your other content goes here -->
     </div>
   </div>

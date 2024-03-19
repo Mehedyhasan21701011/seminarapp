@@ -61,6 +61,8 @@ const IssueInfo = () => {
         }
     };
 
+
+
     const currentStatus = (book_issue_id) => {
         const filterIssueBook = issueInfo.filter(item => item.book_issue_id === book_issue_id);
         const filterBook = bookInfo.filter(item => item.book_id === book_issue_id);
