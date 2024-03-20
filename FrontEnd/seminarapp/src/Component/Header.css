@@ -1,0 +1,6 @@
+li:hover {
+    background-color: #D4CCCD;
+    color: black;
+    font-weight: bold
+        /* Change to desired hover color */
+}

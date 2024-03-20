@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import './IssuePage.css';
+import Header from './Header';
 
 const Issue = () => {
     const location = useLocation();
+    const [display, setDisplay] = useState(false);
     const bookId = location.state ? location.state.bookId : 'Book ID Not Available'; // Placeholder for invalid/missing bookId
     const [issueData, setIssueData] = useState({
         name: '',
@@ -22,7 +24,6 @@ const Issue = () => {
             [name]: value
         }));
     };
-    const [status, setStatus] = useState(false);
     const handleIssueSubmit = async (e) => {
         e.preventDefault();
         const { name, stu_id, isbn, branch, reference, year } = issueData;
@@ -34,13 +35,7 @@ const Issue = () => {
             const response2 = await axios.post('http://localhost:8801/students', {
                 stu_id, name, reference, branch, year, isbn
             });
-            // Handle success, maybe show a success message
-            // console.log('Issue successful:', response.data);
-            // Clear the form
-
-
         } catch (error) {
-            // Handle error, maybe show an error message
             console.error('Error issuing book:', error);
         } finally {
             setIssueData({
@@ -51,15 +46,17 @@ const Issue = () => {
                 reference: '',
                 year: ''
             });
-            setStatus(true);
+            setDisplay(true);
         }
     };
 
     return (
-        <div className="hr-container">
-            <h2>Book Issue Page</h2>
+        <div className="container">
+            <Header></Header>
+            <h2 style={{ textAlign: 'center' }}>Book Issue</h2>
+            {display && <p className='success-message'>Book Added successfully!</p>}
             <hr className="styled-hr"></hr>
-            <div>
+            <div style={{ maxHeight: '350px', overflow: 'auto' }}>
                 <div className='mb-3' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <input
                         onChange={handleIssueChange}
@@ -115,7 +112,6 @@ const Issue = () => {
                     >
                         submit
                     </button>
-                    <p style={{ display: status ? 'block' : 'none', color: 'black', fontWeight: 'bold' }}>Thanks! Your book issued successfully</p>
                 </div>
             </div>
         </div>

@@ -64,7 +64,7 @@ const Login = () => {
     };
 
     return (
-        <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>
+        <div className='d-flex justify-content-center align-items-center vh-120'>
             <div style={{ textAlign: 'center' }} className='bg-white p-3 rounded w-30'>
                 <h1 style={{ textAlign: 'center' }}>Sign In</h1>
                 <hr></hr>
@@ -83,7 +83,6 @@ const Login = () => {
                     </div>
                     <button type='submit' className='btn btn-success w-100'><strong>Login</strong></button>
                     <p>You agree to our terms and conditions</p>
-                    <Link to="/signup"><button className='btn btn-default border w-100 bg-light rounded-0'><strong>Create Account</strong></button></Link>
                 </form>
             </div>
         </div>

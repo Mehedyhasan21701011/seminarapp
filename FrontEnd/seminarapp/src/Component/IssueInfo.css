@@ -1,0 +1,10 @@
+.table-container {
+    overflow-x: auto;
+    max-height: 340px;
+}
+
+.table-scroll {
+    overflow-y: auto;
+    max-height: 340px;
+    /* Adjust this value based on your requirement */
+}

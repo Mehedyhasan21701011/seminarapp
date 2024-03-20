@@ -83,6 +83,8 @@ app.post('/book_issue', (req, res) => {
         name: req.body.name,
         Student_id: req.body.stu_id,
         book_id: req.body.isbn,
+        branch: req.body.branch,
+        reference: req.body.reference
     };
 
     const sql = 'INSERT INTO book_issue SET ?';
@@ -157,6 +159,8 @@ app.post('/student_categories', (req, res) => {
         res.status(200).json({ status: 200, error: null, response: results });
     });
 });
+
+
 app.get('/users', (req, res) => {
     const sql = 'SELECT * FROM users';
     db1.query(sql, (err, data) => {
@@ -227,6 +231,29 @@ app.delete('/book_issue_log/:book_issue_id', (req, res) => {
             console.log('Record deleted successfully');
             res.status(200).json({ message: 'Record deleted successfully' });
         }
+    });
+});
+app.get('/api/data', (req, res) => {
+    const sql = `
+    SELECT 
+      book_issue.book_id, 
+      book_issue.Student_Id, 
+      book_issue.added_at_timestamp,
+      book_issue.Name,
+      books.title
+    FROM 
+      book_issue 
+    INNER JOIN 
+      books 
+    ON 
+      book_issue.book_id = books.book_id
+  `;
+    db1.query(sql, (err, result) => {
+        if (err) {
+            res.status(500).send('Error fetching data');
+            throw err;
+        }
+        res.json(result);
     });
 });
 
